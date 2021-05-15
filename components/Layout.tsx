@@ -17,7 +17,7 @@ const Layout = ({
   const { darkMode } = useContext(ThemeContext);
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen h-full flex flex-col dark:bg-gray-800 dark:text-gray-200">
+      <div className="min-h-screen h-full flex flex-col dark:bg-gray-800 dark:text-gray-200 text-lg">
         <Head>
           <title>{`WoD Codex${title ? `: ${title}` : ''}`}</title>
           <meta name="description" content={description} />
@@ -41,15 +41,15 @@ const Layout = ({
             </div>
           </header>
         </div>
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow ">
-          <div className="max-w-3xl mx-auto">
-            {title ? (
-              <header className="text-center text-4xl font-medium py-10">
-                <h1>{title}</h1>
-              </header>
-            ) : null}
-            {children}
-          </div>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow mb-8">
+          {/* <div className="max-w-5xl mx-auto"> */}
+          {title ? (
+            <header className="text-center text-4xl font-medium py-10">
+              <h1>{title}</h1>
+            </header>
+          ) : null}
+          {children}
+          {/* </div> */}
         </main>
         <footer className="italic text-center bg-gray-800 dark:bg-gray-900 text-white">
           <span className="pb-3 pt-2 flex justify-center items-center">
@@ -64,7 +64,7 @@ const Layout = ({
               by
             </span>
             <a
-              className="pl-1 transition-colors text-blue-400 hover:text-yellow-500 duration-300 ease-in-out"
+              className="pl-1 text-blue-400 hover:text-yellow-500"
               target="_blank"
               rel="noopener noreferrer nofollow"
               href="https://twitter.com/zaratan"
@@ -73,16 +73,16 @@ const Layout = ({
             </a>
             .
             <a
-              className="pl-1 transition-colors text-blue-400 hover:text-yellow-500 duration-300 ease-in-out"
+              className="pl-1 text-blue-400 hover:text-yellow-500"
               target="_blank"
               rel="noopener noreferrer nofollow"
               href="https://ko-fi.com/zaratan"
             >
               Buy me a tea
             </a>
-            . Data from{' '}
+            . Data from
             <a
-              className="pl-1 transition-colors text-blue-400 hover:text-yellow-500 duration-300 ease-in-out"
+              className="pl-1 text-blue-400 hover:text-yellow-500"
               target="_blank"
               rel="noopener noreferrer nofollow"
               href="http://bindusara.free.fr"
@@ -91,7 +91,7 @@ const Layout = ({
             </a>
             .
             <Link href="/about">
-              <a className="pl-1 transition-colors text-blue-400 hover:text-yellow-500 duration-300 ease-in-out">
+              <a className="pl-1 text-blue-400 hover:text-yellow-500">
                 Learn more
               </a>
             </Link>
