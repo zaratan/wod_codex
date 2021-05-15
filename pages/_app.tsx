@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import '../styles/global.css';
+import { ThemeProvider } from '../contexts/ThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         {/* <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> */}
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

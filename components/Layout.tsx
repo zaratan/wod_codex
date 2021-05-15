@@ -102,20 +102,4 @@ const Layout = ({
   );
 };
 
-const WrappedLayout = ({
-  children,
-  title,
-  description,
-}: {
-  children: ReactNode;
-  title?: string;
-  description: string;
-}) => (
-  <ThemeProvider>
-    <Layout title={title} description={description}>
-      {children}
-    </Layout>
-  </ThemeProvider>
-);
-
-export default WrappedLayout;
+export default Layout;
