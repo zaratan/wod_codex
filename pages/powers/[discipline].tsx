@@ -45,11 +45,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const DisciplinePage = ({
   disciplinePowers,
   disciplineName,
-  disciplineSlug,
   disciplineLevels,
 }: {
   disciplineName: string;
-  disciplineSlug: string;
   disciplinePowers: PowersType;
   disciplineLevels: Array<number>;
 }) => {
