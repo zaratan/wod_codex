@@ -21,8 +21,6 @@ export const getStaticProps: GetStaticProps<
 > = async (context) => {
   const disciplineData = loadDiscipline(String(context.params.discipline));
 
-  console.log(disciplineData.levels);
-
   return {
     props: {
       disciplinePowers: disciplineData.powers,
@@ -50,19 +48,16 @@ const DisciplinePage = ({
   disciplineName: string;
   disciplinePowers: PowersType;
   disciplineLevels: Array<number>;
-}) => {
-  console.log({ disciplinePowers });
-  return (
-    <Layout
-      title={disciplineName}
-      description={`Tous les niveaux de ${disciplineName}`}
-    >
-      <LevelLinks levels={disciplineLevels} />
-      {disciplinePowers.map((levelPowers) => (
-        <LevelPowers levelPowers={levelPowers} />
-      ))}
-    </Layout>
-  );
-};
+}) => (
+  <Layout
+    title={disciplineName}
+    description={`Tous les niveaux de ${disciplineName}`}
+  >
+    <LevelLinks levels={disciplineLevels} />
+    {disciplinePowers.map((levelPowers) => (
+      <LevelPowers levelPowers={levelPowers} />
+    ))}
+  </Layout>
+);
 
 export default DisciplinePage;

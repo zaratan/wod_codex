@@ -89,6 +89,29 @@ export const loadDiscipline = (slug: string) => {
   };
 };
 
+export const loadThaumaturgyPaths = (slug: string) => {
+  const disciplines = loadDisciplinesData();
+  const powers = disciplines.filter(
+    (disc) => slugify(disc.name).toLowerCase() === slug
+  );
+  const paths = powers.reduce<Record<string, { name: string; slug: string }>>(
+    (result, power) => {
+      result[power.subname] ||= {
+        name: power.subname,
+        slug: slugify(power.subname).toLowerCase(),
+      };
+      return result;
+    },
+    {}
+  );
+
+  return {
+    paths: sortBy(Object.values(paths), ['name']),
+    name: powers[0].name,
+    slug,
+  };
+};
+
 export const loadComboDisciplines = () => {
   const dataDirectory = path.join(process.cwd(), 'data');
   const disciplineComboPath = path.join(
