@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import orderBy from 'lodash/orderBy';
 import slugify from 'slugify';
-import { groupBy, sortBy } from 'lodash';
+import { compact, groupBy, sortBy } from 'lodash';
 import { DisciplineType } from '../types/DisciplineTypes';
 import { ComboPowerType } from '../types/ComboTypes';
 
@@ -67,16 +67,16 @@ export const loadDiscipline = (slug: string) => {
     (disc) => slugify(disc.name).toLowerCase() === slug
   );
 
-  const cleanedPowers = powers
-    .reduce<PowersType>((result, power) => {
+  const cleanedPowers = compact(
+    powers.reduce<PowersType>((result, power) => {
       result[power.level] ||= { level: power.level, powers: [] };
       result[power.level].powers.push(power);
       return result;
     }, [])
-    .map((levelPowers) => ({
-      level: Number(levelPowers.level),
-      powers: sortBy(levelPowers.powers, ['title']),
-    }));
+  ).map((levelPowers) => ({
+    level: Number(levelPowers.level),
+    powers: sortBy(levelPowers.powers, ['title']),
+  }));
 
   return {
     powers: cleanedPowers,
