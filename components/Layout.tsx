@@ -17,7 +17,7 @@ const Layout = ({
   const { darkMode } = useContext(ThemeContext);
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen h-full flex flex-col dark:bg-gray-800 dark:text-gray-200 text-lg">
+      <div className="min-h-screen h-full flex flex-col bg-white dark:bg-gray-800 dark:text-gray-200 text-lg">
         <Head>
           <title>{`WoD Codex${title ? `: ${title}` : ''}`}</title>
           <meta name="description" content={description} />
