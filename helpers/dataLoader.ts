@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import orderBy from 'lodash/orderBy';
 import slugify from 'slugify';
-import { compact, groupBy, sortBy } from 'lodash';
+import { compact, sortBy } from 'lodash';
 import { DisciplineType } from '../types/DisciplineTypes';
 import { ComboPowerType } from '../types/ComboTypes';
 
