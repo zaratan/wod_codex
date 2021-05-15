@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React, { ReactNode, useContext } from 'react';
 import ThemeContext, { ThemeProvider } from '../contexts/ThemeContext';
-import classMerge from '../helpers/classMerge';
 import LightToggle from './LightToggle';
 
 const Layout = ({
