@@ -48,15 +48,11 @@ const ThaumaturgyPage = ({
   powers: Array<DisciplineType>;
   name: string;
   slug: string;
-}) => {
-  console.log(powers);
-
-  return (
-    <Layout description={`Toutes les voies de ${name}`} title={name}>
-      <PowerList powers={powers} className="pb-6" />
-      <BigList items={paths} path={`/thaumaturgies/${slug}`} />
-    </Layout>
-  );
-};
+}) => (
+  <Layout description={`Toutes les voies de ${name}`} title={name}>
+    <PowerList powers={powers} className="pb-6" />
+    <BigList items={paths} path={`/powers/thaumaturgies/${slug}`} />
+  </Layout>
+);
 
 export default ThaumaturgyPage;

@@ -20,7 +20,14 @@ export const loadDisciplines = () => {
 
   const disciplinesReworked = disciplines.reduce<{
     disciplines: Record<string, { name: string; slug: string }>;
-    thaumaturgies: Record<string, { name: string; slug: string }>;
+    thaumaturgies: Record<
+      string,
+      {
+        name: string;
+        slug: string;
+        paths: Record<string, { name: string; slug: string }>;
+      }
+    >;
   }>(
     (result, discipline) => {
       if (discipline.subname === '' && discipline.level !== 0) {
@@ -30,27 +37,42 @@ export const loadDisciplines = () => {
             slug: slugify(discipline.name).toLowerCase(),
           };
         }
-      } else if (
-        discipline.subname !== '' &&
-        !result.thaumaturgies[discipline.name]
-      ) {
-        result.thaumaturgies[discipline.name] = {
-          name: discipline.name,
-          slug: slugify(discipline.name).toLowerCase(),
-        };
+      } else if (discipline.subname !== '') {
+        if (!result.thaumaturgies[discipline.name]) {
+          result.thaumaturgies[discipline.name] = {
+            name: discipline.name,
+            slug: slugify(discipline.name).toLowerCase(),
+            paths: {},
+          };
+        }
+        if (!result.thaumaturgies[discipline.name].paths[discipline.subname]) {
+          result.thaumaturgies[discipline.name].paths[discipline.subname] = {
+            name: discipline.subname,
+            slug: slugify(discipline.subname).toLowerCase(),
+          };
+        }
       }
       return result;
     },
     { disciplines: {}, thaumaturgies: {} }
   );
 
-  return {
+  const cleanedPowers = {
     disciplines: orderBy(Object.values(disciplinesReworked.disciplines), [
       'name',
     ]),
     thaumaturgies: orderBy(Object.values(disciplinesReworked.thaumaturgies), [
       'name',
-    ]),
+    ]).map((thau) => ({
+      name: thau.name,
+      slug: thau.slug,
+      paths: orderBy(Object.values(thau.paths), ['name']),
+    })),
+  };
+
+  return {
+    disciplines: cleanedPowers.disciplines,
+    thaumaturgies: cleanedPowers.thaumaturgies,
   };
 };
 
@@ -61,13 +83,8 @@ export interface LevelPowerType {
 
 export type PowersType = Array<LevelPowerType>;
 
-export const loadDiscipline = (slug: string) => {
-  const disciplines = loadDisciplinesData();
-  const powers = disciplines.filter(
-    (disc) => slugify(disc.name).toLowerCase() === slug
-  );
-
-  const cleanedPowers = compact(
+const cleanPowers = (powers: Array<DisciplineType>) =>
+  compact(
     powers.reduce<PowersType>((result, power) => {
       result[power.level] ||= { level: power.level, powers: [] };
       result[power.level].powers.push(power);
@@ -77,6 +94,14 @@ export const loadDiscipline = (slug: string) => {
     level: Number(levelPowers.level),
     powers: sortBy(levelPowers.powers, ['title']),
   }));
+
+export const loadDiscipline = (slug: string) => {
+  const disciplines = loadDisciplinesData();
+  const powers = disciplines.filter(
+    (disc) => slugify(disc.name).toLowerCase() === slug
+  );
+
+  const cleanedPowers = cleanPowers(powers);
 
   return {
     powers: cleanedPowers,
@@ -115,6 +140,33 @@ export const loadThaumaturgyPaths = (slug: string) => {
     powers: thaumaParsed.powers,
     name: powers[0].name,
     slug,
+  };
+};
+
+export const loadThaumaturgyPath = (
+  thaumaturgySlug: string,
+  pathSlug: string
+) => {
+  const disciplines = loadDisciplinesData();
+  const powers = disciplines.filter(
+    (disc) => slugify(disc.name).toLowerCase() === thaumaturgySlug
+  );
+  const pathPowers = powers.filter(
+    (disc) => slugify(disc.subname).toLowerCase() === pathSlug
+  );
+
+  const cleanedPowers = cleanPowers(pathPowers);
+
+  return {
+    powers: cleanedPowers,
+    levels: cleanedPowers
+      .map((e) => e.level)
+      .filter((level) => level !== 0)
+      .sort((a, b) => a - b),
+    name: pathPowers[0]?.name,
+    subname: pathPowers[0]?.subname,
+    thaumaturgySlug,
+    pathSlug,
   };
 };
 
