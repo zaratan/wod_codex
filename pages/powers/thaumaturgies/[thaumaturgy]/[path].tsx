@@ -57,7 +57,10 @@ const PathPage = ({
   <Layout title={`${name} : ${subname}`} description="">
     <LevelLinks levels={levels} />
     {powers.map((levelPowers) => (
-      <LevelPowers levelPowers={levelPowers} />
+      <LevelPowers
+        key={`level-${levelPowers.level}`}
+        levelPowers={levelPowers}
+      />
     ))}
   </Layout>
 );

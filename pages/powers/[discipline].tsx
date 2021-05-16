@@ -55,7 +55,10 @@ const DisciplinePage = ({
   >
     <LevelLinks levels={disciplineLevels} />
     {disciplinePowers.map((levelPowers) => (
-      <LevelPowers levelPowers={levelPowers} />
+      <LevelPowers
+        key={`level-${levelPowers.level}`}
+        levelPowers={levelPowers}
+      />
     ))}
   </Layout>
 );

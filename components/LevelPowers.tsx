@@ -4,7 +4,7 @@ import LevelTitle from './LevelTitle';
 import PowerList from './PowerList';
 
 const LevelPowers = ({ levelPowers }: { levelPowers: LevelPowerType }) => (
-  <section key={`level-${levelPowers.level}`} id={`level-${levelPowers.level}`}>
+  <section id={`level-${levelPowers.level}`}>
     <LevelTitle level={levelPowers.level} />
     <PowerList powers={levelPowers.powers} />
   </section>
