@@ -43,7 +43,7 @@ const Layout = ({
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow mb-8">
           {/* <div className="max-w-5xl mx-auto"> */}
           {title ? (
-            <header className="text-center text-4xl font-medium py-10">
+            <header className="text-center text-4xl font-medium py-10 font-serif">
               <h1>{title}</h1>
             </header>
           ) : null}

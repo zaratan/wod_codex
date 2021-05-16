@@ -9,7 +9,7 @@ const Table = ({ table }: { table: Array<Array<string>> }) => (
             <tbody>
               {table.map((row, rowIdx) => (
                 <tr
-                  key={row[0]}
+                  key={rowIdx}
                   className={
                     rowIdx % 2 === 0
                       ? 'bg-white dark:bg-gray-800'

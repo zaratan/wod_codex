@@ -12,7 +12,6 @@ module.exports = {
       },
       fontFamily: {
         // sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        serif: ['Neuton', ...defaultTheme.fontFamily.serif],
       },
     },
   },

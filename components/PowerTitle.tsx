@@ -18,7 +18,7 @@ const PowerTitle = ({
   const slug = `power-${slugify(title).toLowerCase()}-${source.length}`;
   return title ? (
     <header className="text-2xl py-3" id={slug}>
-      <h4 className="flex flex-row items-center space-x-2 font-medium">
+      <h4 className="flex flex-row items-center space-x-2 font-medium font-serif">
         <span>{title}</span>
         <a href={`#${slug}`}>
           <LinkIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 opacity-75 hover:opacity-100" />
