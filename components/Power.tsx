@@ -29,6 +29,9 @@ const Power = ({ power }: { power: PowerType | ComboPowerType }) => (
       <div className="max-w-md pt-4">{power.source}</div>
     </footer>
     {power.extra_table ? <Table table={power.extra_table} /> : null}
+    {(power as PowerType).extra_table_two ? (
+      <Table table={(power as PowerType).extra_table_two} />
+    ) : null}
   </article>
 );
 
