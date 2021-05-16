@@ -94,19 +94,25 @@ export const loadThaumaturgyPaths = (slug: string) => {
   const powers = disciplines.filter(
     (disc) => slugify(disc.name).toLowerCase() === slug
   );
-  const paths = powers.reduce<Record<string, { name: string; slug: string }>>(
+  const thaumaParsed = powers.reduce<{
+    paths: Record<string, { name: string; slug: string }>;
+    powers: Array<DisciplineType>;
+  }>(
     (result, power) => {
-      result[power.subname] ||= {
-        name: power.subname,
-        slug: slugify(power.subname).toLowerCase(),
-      };
+      if (power.subname) {
+        result.paths[power.subname] ||= {
+          name: power.subname,
+          slug: slugify(power.subname).toLowerCase(),
+        };
+      } else if (power.level === 0) result.powers.push(power);
       return result;
     },
-    {}
+    { paths: {}, powers: [] }
   );
 
   return {
-    paths: sortBy(Object.values(paths), ['name']),
+    paths: sortBy(Object.values(thaumaParsed.paths), ['name']),
+    powers: thaumaParsed.powers,
     name: powers[0].name,
     slug,
   };

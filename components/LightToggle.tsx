@@ -1,5 +1,5 @@
 import { Switch } from '@headlessui/react';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { SunIcon, MoonIcon } from '@heroicons/react/solid';
 import classMerge from '../helpers/classMerge';
 import ThemeContext from '../contexts/ThemeContext';

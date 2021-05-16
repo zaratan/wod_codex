@@ -1,10 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
 import React from 'react';
 import BigList from '../../../components/BigList';
 import Layout from '../../../components/Layout';
+import PowerList from '../../../components/PowerList';
 import {
-  loadDiscipline,
   loadDisciplines,
   loadThaumaturgyPaths,
 } from '../../../helpers/dataLoader';
@@ -13,6 +12,7 @@ import { DisciplineType } from '../../../types/DisciplineTypes';
 export const getStaticProps: GetStaticProps<
   {
     paths: Array<{ name: string; slug: string }>;
+    powers: Array<DisciplineType>;
     name: string;
     slug: string;
   },
@@ -40,16 +40,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const ThaumaturgyPage = ({
   paths,
+  powers,
   name,
   slug,
 }: {
   paths: Array<{ name: string; slug: string }>;
+  powers: Array<DisciplineType>;
   name: string;
   slug: string;
-}) => (
-  <Layout description={`Toutes les voies de ${name}`} title={name}>
-    <BigList items={paths} path={`/thaumaturgies/${slug}`} />
-  </Layout>
-);
+}) => {
+  console.log(powers);
+
+  return (
+    <Layout description={`Toutes les voies de ${name}`} title={name}>
+      <PowerList powers={powers} className="pb-6" />
+      <BigList items={paths} path={`/thaumaturgies/${slug}`} />
+    </Layout>
+  );
+};
 
 export default ThaumaturgyPage;
