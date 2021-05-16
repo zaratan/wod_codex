@@ -13,7 +13,7 @@ const PowerList = ({
   powers.length > 0 ? (
     <ul className={className}>
       {powers.map((power: DisciplineType | ComboPowerType) => (
-        <li key={`power-${power.name}-${power.source.length}`}>
+        <li key={`power-${power.title}-${power.source.length}`}>
           <Power power={power} />
         </li>
       ))}

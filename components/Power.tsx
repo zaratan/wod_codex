@@ -21,8 +21,8 @@ const Power = ({ power }: { power: PowerType | ComboPowerType }) => (
       }
     />
     <section className="space-y-1">
-      {power.description.map((paragraph) => (
-        <p>{paragraph}</p>
+      {power.description.map((paragraph, i) => (
+        <p key={`power-${power.title}-para-${i}`}>{paragraph}</p>
       ))}
     </section>
     <footer className="text-xs flex justify-end w-full">
