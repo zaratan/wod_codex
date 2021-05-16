@@ -42,9 +42,9 @@ export default function Home({
         Disciplines Combinées
         <small className="text-center block text-sm">Avec :</small>
       </h2>
-      <BigList items={comboRequirements} path="/combo">
+      <BigList items={comboRequirements} path="/powers/combo">
         <li>
-          <Link href="/combo">
+          <Link href="/powers/combo">
             <a className="mb-2 block">Toutes</a>
           </Link>
         </li>

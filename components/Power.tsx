@@ -1,11 +1,25 @@
 import React from 'react';
+import { ComboPowerType } from '../types/ComboTypes';
 import { PowerType } from '../types/DisciplineTypes';
 import PowerTitle from './PowerTitle';
 import Table from './Table';
 
-const Power = ({ power }: { power: PowerType }) => (
+const Power = ({ power }: { power: PowerType | ComboPowerType }) => (
   <article className="py-6">
-    <PowerTitle title={power.title} source={power.source} />
+    <PowerTitle
+      title={power.title}
+      source={power.source}
+      requirements={
+        (power as ComboPowerType).requirements
+          ? (power as ComboPowerType).requirements
+          : null
+      }
+      extraRequirements={
+        (power as ComboPowerType).extra_requirements
+          ? (power as ComboPowerType).extra_requirements
+          : null
+      }
+    />
     <section className="space-y-1">
       {power.description.map((paragraph) => (
         <p>{paragraph}</p>

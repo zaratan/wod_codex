@@ -8,6 +8,7 @@ export type RequirementsType = Array<RequirementType>;
 export type ExtraRequirementsType = Array<string>;
 
 export type ComboPowerType = {
+  title: string;
   name: string;
   requirements: RequirementsType;
   extra_requirements: ExtraRequirementsType;

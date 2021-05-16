@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import orderBy from 'lodash/orderBy';
 import slugify from 'slugify';
-import { compact, sortBy } from 'lodash';
+import { compact, sortBy, sum } from 'lodash';
 import { DisciplineType } from '../types/DisciplineTypes';
 import { ComboPowerType } from '../types/ComboTypes';
 
@@ -177,10 +177,56 @@ export const loadComboDisciplines = () => {
     'disciplines_combo.json'
   );
   const disciplinesComboJson = fs.readFileSync(disciplineComboPath, 'utf8');
-  const disciplinesCombo: Array<ComboPowerType> =
-    JSON.parse(disciplinesComboJson);
+  const disciplinesCombo: Array<ComboPowerType> = JSON.parse(
+    disciplinesComboJson
+  ).map((e) => ({ ...e, title: e.name }));
 
-  return disciplinesCombo;
+  return sortBy(disciplinesCombo, [
+    (disc) =>
+      disc.requirements.reduce<number>(
+        (result, req) => Math.max(result, ...req.or.map((e) => e.level)),
+        0
+      ),
+    (disc) =>
+      disc.requirements.reduce<number>(
+        (result, req) => sum([result, ...req.or.map((e) => Number(e.level))]),
+        0
+      ),
+    'name',
+  ]);
+};
+
+export const filteredLoadComboDisciplines = (filter: string) => {
+  const dataDirectory = path.join(process.cwd(), 'data');
+  const disciplineComboPath = path.join(
+    dataDirectory,
+    'disciplines_combo.json'
+  );
+  const disciplinesComboJson = fs.readFileSync(disciplineComboPath, 'utf8');
+  const disciplinesCombo: Array<ComboPowerType> = JSON.parse(
+    disciplinesComboJson
+  ).map((e) => ({ ...e, title: e.name }));
+
+  const filteredDisciplinesCombo = disciplinesCombo.filter((disciplineCombo) =>
+    disciplineCombo.requirements
+      .flatMap((req) => req.or.map((e) => slugify(e.name).toLowerCase()))
+      .includes(filter)
+  );
+
+  return sortBy(filteredDisciplinesCombo, [
+    (disc) =>
+      disc.requirements.reduce<number>(
+        (result, req) =>
+          Math.max(
+            result,
+            ...req.or.map((e) =>
+              slugify(e.name).toLocaleLowerCase() === filter ? e.level : 0
+            )
+          ),
+        0
+      ),
+    'name',
+  ]);
 };
 
 export const loadComboDisciplinesRequirements = () => {

@@ -1,8 +1,20 @@
 import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
 import slugify from 'slugify';
+import { ExtraRequirementsType, RequirementsType } from '../types/ComboTypes';
+import Requirements from './Requirements';
 
-const PowerTitle = ({ title, source }: { title: string; source: string }) => {
+const PowerTitle = ({
+  title,
+  source,
+  requirements,
+  extraRequirements,
+}: {
+  title: string;
+  source: string;
+  requirements?: RequirementsType;
+  extraRequirements?: ExtraRequirementsType;
+}) => {
   const slug = `power-${slugify(title).toLowerCase()}-${source.length}`;
   return title ? (
     <header className="text-2xl py-3" id={slug}>
@@ -12,6 +24,10 @@ const PowerTitle = ({ title, source }: { title: string; source: string }) => {
           <LinkIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 opacity-75 hover:opacity-100" />
         </a>
       </h4>
+      <Requirements
+        requirements={requirements || []}
+        extraRequirements={extraRequirements}
+      />
     </header>
   ) : null;
 };
