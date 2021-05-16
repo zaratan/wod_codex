@@ -9,15 +9,18 @@ const Table = ({ table }: { table: Array<Array<string>> }) => (
             <tbody>
               {table.map((row, rowIdx) => (
                 <tr
-                  key={rowIdx}
+                  key={`${row[0]}-${rowIdx}`}
                   className={
                     rowIdx % 2 === 0
                       ? 'bg-white dark:bg-gray-800'
                       : 'bg-gray-100 dark:bg-gray-700'
                   }
                 >
-                  {row.map((cell) => (
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">
+                  {row.map((cell, cellId) => (
+                    <td
+                      key={`${row[0]}-${rowIdx}-${cell}-${cellId}`}
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100"
+                    >
                       {cell}
                     </td>
                   ))}

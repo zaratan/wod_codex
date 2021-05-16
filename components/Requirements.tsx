@@ -13,7 +13,7 @@ const Requirements = ({
       .slice()
       .sort((a, b) => b.or[0].level - a.or[0].level)
       .map((requirement, j) => (
-        <span key={`req-loop-${j}`}>
+        <span key={`req-loop-${requirement.or.length}-${j}`}>
           {j !== 0 ? <span key={`and-${j}`}>, </span> : null}
           {requirement.or.map((req, i) => (
             <span key={`req-loop-${j}-${i}`}>
@@ -30,10 +30,10 @@ const Requirements = ({
       <>
         {requirements.length > 0 ? <span>, </span> : null}
         {extraRequirements.map((req, i) => (
-          <>
+          <div key={`extra-req-${i}`}>
             {i > 0 ? <span>, </span> : null}
             <span>{req}</span>
-          </>
+          </div>
         ))}
       </>
     ) : null}
