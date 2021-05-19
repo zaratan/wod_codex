@@ -129,7 +129,7 @@
     "name": "Destrier exceptionnel",
     "description": "Vous possédez un cheval de guerre de grande valeur. -1SR pour les jets de Dressage et pour les jets d'équitaiton impliquant une prouesse quelconque. Pour 2 points, ce destrier est normal, et vous devez avoir Dressage à 1 ou Animalisme. Pour 3 points, c'est une goule.",
     "kind": "Atout",
-    "type": "Possession Dark Ages",
+    "type": "Possession",
     "subtype": "Vampire Dark Ages",
     "level": [2, 3],
     "source": "Ashen Knight (2826) p102"

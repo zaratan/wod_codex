@@ -26,7 +26,7 @@ const Power = ({ power }: { power: PowerType | ComboPowerType }) => (
       ))}
     </section>
     <footer className="text-xs flex justify-end w-full">
-      <div className="max-w-md pt-4">{power.source}</div>
+      <div className="sm:max-w-md pt-4">{power.source}</div>
     </footer>
     {power.extra_table ? <Table table={power.extra_table} /> : null}
     {(power as PowerType).extra_table_two ? (
