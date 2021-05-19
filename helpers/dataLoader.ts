@@ -5,6 +5,7 @@ import slugify from 'slugify';
 import { compact, sortBy, sum } from 'lodash';
 import { DisciplineType } from '../types/DisciplineTypes';
 import { ComboPowerType } from '../types/ComboTypes';
+import { AdvFlawsType, AdvFlawType } from '../types/AdvFlawTypes';
 
 export const loadDisciplinesData = () => {
   const dataDirectory = path.join(process.cwd(), 'data');
@@ -170,7 +171,7 @@ export const loadThaumaturgyPath = (
   };
 };
 
-export const loadComboDisciplines = () => {
+const loadComboDisciplinesData = () => {
   const dataDirectory = path.join(process.cwd(), 'data');
   const disciplineComboPath = path.join(
     dataDirectory,
@@ -180,6 +181,12 @@ export const loadComboDisciplines = () => {
   const disciplinesCombo: Array<ComboPowerType> = JSON.parse(
     disciplinesComboJson
   ).map((e) => ({ ...e, title: e.name }));
+
+  return disciplinesCombo;
+};
+
+export const loadComboDisciplines = () => {
+  const disciplinesCombo = loadComboDisciplinesData();
 
   return sortBy(disciplinesCombo, [
     (disc) =>
@@ -197,15 +204,7 @@ export const loadComboDisciplines = () => {
 };
 
 export const filteredLoadComboDisciplines = (filter: string) => {
-  const dataDirectory = path.join(process.cwd(), 'data');
-  const disciplineComboPath = path.join(
-    dataDirectory,
-    'disciplines_combo.json'
-  );
-  const disciplinesComboJson = fs.readFileSync(disciplineComboPath, 'utf8');
-  const disciplinesCombo: Array<ComboPowerType> = JSON.parse(
-    disciplinesComboJson
-  ).map((e) => ({ ...e, title: e.name }));
+  const disciplinesCombo = loadComboDisciplinesData();
 
   const filteredDisciplinesCombo = disciplinesCombo.filter((disciplineCombo) =>
     disciplineCombo.requirements
@@ -249,4 +248,102 @@ export const loadComboDisciplinesRequirements = () => {
     }));
 
   return comboRequirements;
+};
+
+const loadAdvFlawsData = () => {
+  const dataDirectory = path.join(process.cwd(), 'data');
+  const advFlawPath = path.join(dataDirectory, 'adv_flaw.json');
+  const advFlawJson = fs.readFileSync(advFlawPath, 'utf8');
+  const advFlaws: AdvFlawsType = JSON.parse(advFlawJson);
+
+  return advFlaws;
+};
+
+export const loadAdvFlawCategories = () => {
+  const advFlaws = loadAdvFlawsData();
+
+  return sortBy(
+    Object.values(
+      advFlaws.reduce<
+        Record<
+          string,
+          {
+            type: string;
+            typeSlug: string;
+          }
+        >
+      >((results, advFlaw) => {
+        if (!results[`${advFlaw.type}`]) {
+          results[`${advFlaw.type}`] = {
+            type: advFlaw.type,
+            typeSlug: slugify(advFlaw.type).toLowerCase(),
+          };
+        }
+        return results;
+      }, {})
+    ),
+    ['type']
+  );
+};
+
+export const loadAdvFlaws = () => {
+  const advFlaws = loadAdvFlawsData();
+
+  const sortedAdvFlaws = sortBy(
+    Object.values(
+      advFlaws.reduce<
+        Record<
+          string,
+          { type: string; subtype: string; data: Array<AdvFlawType> }
+        >
+      >((results, newAdvFlaw) => {
+        if (!results[`${newAdvFlaw.type}-${newAdvFlaw.subtype}`]) {
+          results[`${newAdvFlaw.type}-${newAdvFlaw.subtype}`] = {
+            type: newAdvFlaw.type,
+            subtype: newAdvFlaw.subtype,
+            data: [],
+          };
+        }
+
+        results[`${newAdvFlaw.type}-${newAdvFlaw.subtype}`].data.push(
+          newAdvFlaw
+        );
+
+        return results;
+      }, {})
+    ).map((advFlawGroup) => {
+      advFlawGroup.data = sortBy(advFlawGroup.data, [
+        (advFlaw) =>
+          typeof advFlaw.level === 'number'
+            ? advFlaw.level
+            : Math.max(...advFlaw.level),
+        'name',
+      ]);
+      return advFlawGroup;
+    }),
+    ['type', 'subtype']
+  );
+
+  return Object.values(
+    sortedAdvFlaws.reduce<
+      Record<
+        string,
+        {
+          type: string;
+          subtypes: Array<{
+            type: string;
+            subtype: string;
+            data: Array<AdvFlawType>;
+          }>;
+        }
+      >
+    >((results, subtype) => {
+      if (!results[subtype.type])
+        results[subtype.type] = { subtypes: [], type: subtype.type };
+
+      results[subtype.type].subtypes.push(subtype);
+
+      return results;
+    }, {})
+  );
 };
