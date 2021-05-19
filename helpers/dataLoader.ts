@@ -286,7 +286,7 @@ export const loadAdvFlawCategories = () => {
   );
 };
 
-export const loadAdvFlaws = () => {
+export const loadAdvFlaws = (type?: string) => {
   const advFlaws = loadAdvFlawsData();
 
   const sortedAdvFlaws = sortBy(
@@ -324,7 +324,7 @@ export const loadAdvFlaws = () => {
     ['type', 'subtype']
   );
 
-  return Object.values(
+  let result = Object.values(
     sortedAdvFlaws.reduce<
       Record<
         string,
@@ -346,4 +346,10 @@ export const loadAdvFlaws = () => {
       return results;
     }, {})
   );
+
+  if (type) {
+    result = result.filter((res) => slugify(res.type).toLowerCase() === type);
+  }
+
+  return result;
 };
