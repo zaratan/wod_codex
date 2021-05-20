@@ -1,6 +1,4 @@
-import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
-import slugify from 'slugify';
 import { advFlawSlug } from '../helpers/slugs';
 import { AdvFlawType } from '../types/AdvFlawTypes';
 import StyledLinkIcon from './Styled/StyledLinkIcon';

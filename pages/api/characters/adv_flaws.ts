@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import slugify from 'slugify';
 import { loadAdvFlaws } from '../../../helpers/dataLoader';
 import runCors from '../../../helpers/runCors';
 import { advFlawSlug } from '../../../helpers/slugs';

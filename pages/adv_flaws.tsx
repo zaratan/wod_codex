@@ -1,4 +1,3 @@
-import { LinkIcon } from '@heroicons/react/outline';
 import { GetStaticProps } from 'next';
 import React from 'react';
 import AdvFlawCategory from '../components/AdvFlawCategory';

@@ -1,4 +1,3 @@
-import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { AdvFlawType } from '../types/AdvFlawTypes';
 import AdvFlaw from './AdvFlaw';

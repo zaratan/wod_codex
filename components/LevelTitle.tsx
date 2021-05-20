@@ -1,5 +1,4 @@
 import React from 'react';
-import { LinkIcon } from '@heroicons/react/outline';
 import StyledLinkIcon from './Styled/StyledLinkIcon';
 
 const LevelTitle = ({ level }: { level: number }) =>

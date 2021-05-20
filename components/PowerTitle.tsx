@@ -1,4 +1,3 @@
-import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
 import slugify from 'slugify';
 import { ExtraRequirementsType, RequirementsType } from '../types/ComboTypes';
