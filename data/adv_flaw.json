@@ -7155,6 +7155,15 @@
     "source": "Dark Ages: Players Guide to Low Clans (20006) p184"
   },
   {
+    "name": "Némésis",
+    "description": "Un opposant cherche à vous nuire et semble posséder un coup d'avance pour venir contrecarrer vos plans.",
+    "kind": "Handicap",
+    "type": "Surnaturel",
+    "subtype": "Changelin",
+    "level": -5,
+    "source": "Kithbook Eshu, page 86"
+  },
+  {
     "name": "Vrai Berserk",
     "description": "Vous êtes un vrai Berserk. Vous devez provoquer cet état par des automutilations, en rongeant votre bouclier, ou votre hache, ou tout autre acte preuve de votre rage guerrière. +2 en Force, +1 en Vigueur, +3 niveaux de santé (contusion). Les blessures sont considérées de 2 niveaux moins importantes pour les pénalités. Dure tuote la scène, ou bien jusqu'à ce que 3 tours soient passés loin des combats ou de toute épreuve physique. Un berserk ne peut pas porter d'armure (et la jetera s'il en a une), ne peut devenir berserk que sous forme humaine, ne reste berserk que s'il garde forme humaine (il entre en frénésie simple si celà arrive). L'état de Berseck ne peut être simultané à une frénésie.",
     "kind": "Atout",
