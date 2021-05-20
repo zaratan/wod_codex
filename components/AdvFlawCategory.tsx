@@ -3,6 +3,7 @@ import React from 'react';
 import { AdvFlawType } from '../types/AdvFlawTypes';
 import AdvFlawSubCategoryLinks from './AdvFlawSubCategoryLinks';
 import AdvFlawSubType from './AdvFlawSubType';
+import StyledLinkIcon from './Styled/StyledLinkIcon';
 
 const AdvFlawCategory = ({
   advFlawsGroup,
@@ -19,12 +20,12 @@ const AdvFlawCategory = ({
   withoutTitle?: boolean;
 }) => (
   <section id={`type-${advFlawsGroup.type}`}>
-    <header className="text-3xl py-5">
+    <header className="text-3xl py-5 group">
       {withoutTitle ? null : (
         <h3 className="flex flex-row space-x-2 items-center font-medium font-serif justify-center">
           <span>{advFlawsGroup.type}</span>
           <a href={`#type-${advFlawsGroup.type}`}>
-            <LinkIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 opacity-75 hover:opacity-100" />
+            <StyledLinkIcon />
           </a>
         </h3>
       )}

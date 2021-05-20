@@ -2,6 +2,7 @@ import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
 import slugify from 'slugify';
 import { AdvFlawType } from '../types/AdvFlawTypes';
+import StyledLinkIcon from './Styled/StyledLinkIcon';
 
 const AdvFlaw = ({ advFlaw }: { advFlaw: AdvFlawType }) => {
   const slug = `${advFlaw.kind === 'Atout' ? 'adv' : 'flaw'}-${slugify(
@@ -10,7 +11,7 @@ const AdvFlaw = ({ advFlaw }: { advFlaw: AdvFlawType }) => {
     advFlaw.source.length
   }`;
   return (
-    <article className="py-6" id={slug}>
+    <article className="py-6 group" id={slug}>
       <header className="flex flex-row items-baseline py-3">
         <h5 className="pr-4 text-2xl flex flex-col sm:flex-row items-baseline space-y-2 sm:space-x-2 font-medium font-serif">
           <span className="flex flex-row space-x-2 items-baseline">
@@ -24,11 +25,11 @@ const AdvFlaw = ({ advFlaw }: { advFlaw: AdvFlawType }) => {
                 : advFlaw.level.join(' ou ')}
             </span>
             <a href={`#${slug}`} className="block sm:hidden">
-              <LinkIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 opacity-75 hover:opacity-100" />
+              <StyledLinkIcon />
             </a>
           </span>
           <a href={`#${slug}`} className="hidden sm:block">
-            <LinkIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 opacity-75 hover:opacity-100" />
+            <StyledLinkIcon />
           </a>
         </h5>
       </header>

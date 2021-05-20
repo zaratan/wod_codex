@@ -5,7 +5,7 @@ import PowerTitle from './PowerTitle';
 import Table from './Table';
 
 const Power = ({ power }: { power: PowerType | ComboPowerType }) => (
-  <article className="py-6">
+  <article className="py-6 group">
     <PowerTitle
       title={power.title}
       source={power.source}
