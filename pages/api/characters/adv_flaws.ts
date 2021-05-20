@@ -12,15 +12,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     .map((e) => e.subtypes.map((f) => f.data))
     .flat(2)
     .reduce<{
-      advantages: Array<{ name: string; path: string; levels: Array<number> }>;
-      flaws: Array<{ name: string; path: string; levels: Array<number> }>;
+      advantages: Array<{ name: string; url: string; levels: Array<number> }>;
+      flaws: Array<{ name: string; url: string; levels: Array<number> }>;
     }>(
       (result, nextAdvFlaw) => {
         const slug = advFlawSlug(nextAdvFlaw);
 
         const newRes = {
           name: nextAdvFlaw.name,
-          path: `/adv_flaws#${slug}`,
+          url: `https://wod.zaratan.fr/adv_flaws#${slug}`,
           levels:
             typeof nextAdvFlaw.level === 'number'
               ? [nextAdvFlaw.level]
