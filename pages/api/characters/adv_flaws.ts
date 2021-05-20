@@ -33,5 +33,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       { advantages: [], flaws: [] }
     );
 
-  res.json(results);
+  res.json({ results, test_url: process.env.VERCEL_URL });
 };
