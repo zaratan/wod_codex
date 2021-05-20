@@ -21,8 +21,8 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn) {
   });
 }
 
-const runCors = (req: NextApiRequest, res: NextApiResponse) => {
-  runMiddleware(req, res, cors);
+const runCors = async (req: NextApiRequest, res: NextApiResponse) => {
+  await runMiddleware(req, res, cors);
 };
 
 export default runCors;
