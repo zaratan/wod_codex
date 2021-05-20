@@ -1,15 +1,12 @@
 import { LinkIcon } from '@heroicons/react/outline';
 import React from 'react';
 import slugify from 'slugify';
+import { advFlawSlug } from '../helpers/slugs';
 import { AdvFlawType } from '../types/AdvFlawTypes';
 import StyledLinkIcon from './Styled/StyledLinkIcon';
 
 const AdvFlaw = ({ advFlaw }: { advFlaw: AdvFlawType }) => {
-  const slug = `${advFlaw.kind === 'Atout' ? 'adv' : 'flaw'}-${slugify(
-    advFlaw.type
-  ).toLowerCase()}-${slugify(advFlaw.name).toLowerCase()}-${
-    advFlaw.source.length
-  }`;
+  const slug = advFlawSlug(advFlaw);
   return (
     <article className="py-6 group" id={slug}>
       <header className="flex flex-row items-baseline py-3">

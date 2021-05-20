@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import slugify from 'slugify';
 import { loadAdvFlaws } from '../../../helpers/dataLoader';
 import runCors from '../../../helpers/runCors';
+import { advFlawSlug } from '../../../helpers/slugs';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await runCors(req, res);
@@ -15,9 +17,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       flaws: Array<{ name: string; path: string; levels: Array<number> }>;
     }>(
       (result, nextAdvFlaw) => {
+        const slug = advFlawSlug(nextAdvFlaw);
+
         const newRes = {
           name: nextAdvFlaw.name,
-          path: ``,
+          path: `/adv_flaws#${slug}`,
           levels:
             typeof nextAdvFlaw.level === 'number'
               ? [nextAdvFlaw.level]
@@ -33,5 +37,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       { advantages: [], flaws: [] }
     );
 
-  res.json({ results, test_url: process.env.VERCEL_URL });
+  res.json(results);
 };
