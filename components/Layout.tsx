@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { ReactNode, useContext } from 'react';
 import ThemeContext from '../contexts/ThemeContext';
 import LightToggle from './LightToggle';
+import ScrollToTopButton from './ScrollToTopButton';
 
 const Layout = ({
   children,
@@ -105,6 +106,7 @@ const Layout = ({
           </span>
         </footer>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 };
