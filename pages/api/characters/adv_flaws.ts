@@ -3,7 +3,7 @@ import { loadAdvFlaws } from '../../../helpers/dataLoader';
 import runCors from '../../../helpers/runCors';
 import { advFlawSlug } from '../../../helpers/slugs';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const apiCall = async (req: NextApiRequest, res: NextApiResponse) => {
   await runCors(req, res);
 
   const advFlaws = loadAdvFlaws();
@@ -38,3 +38,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.json(results);
 };
+
+export default apiCall;

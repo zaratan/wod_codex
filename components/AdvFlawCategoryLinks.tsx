@@ -6,10 +6,8 @@ const AdvFlawCategoryLinks = ({ types }: { types: Array<string> }) => (
 
     <ul className="flex flex-row sm:justify-between flex-wrap">
       {types.map((type) => (
-        <li className="pr-3 last:pr-0">
-          <a href={`#type-${type}`} key={`type-${type}`}>
-            {type}
-          </a>
+        <li className="pr-3 last:pr-0" key={`type-${type}`}>
+          <a href={`#type-${type}`}>{type}</a>
         </li>
       ))}
     </ul>

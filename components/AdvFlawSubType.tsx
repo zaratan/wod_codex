@@ -23,7 +23,10 @@ const AdvFlawSubType = ({
     </header>
     <ul>
       {advFlawsSubGroup.data.map((advFlaws) => (
-        <AdvFlaw advFlaw={advFlaws} />
+        <AdvFlaw
+          advFlaw={advFlaws}
+          key={`adv-flaw-${advFlaws.name}-${advFlaws.source.length}`}
+        />
       ))}
     </ul>
   </section>
